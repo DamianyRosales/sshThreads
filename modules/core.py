@@ -1,12 +1,13 @@
-import chat
+import communication
 import cry
 from getpass import getuser
 from threadpool import Pool
 
 pool = Pool()
+chat = communication.Interface()
 
 if getuser() == 'nyro':
-    #pool.add(cpy.keyToServerCheck())
     pool.add(cry.keyToServerCheck)
+    pool.add(chat.establish)
     pool.initialize()
     
