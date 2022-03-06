@@ -2,6 +2,7 @@ from sys import stdin
 from paramiko import SSHClient, AutoAddPolicy
 import time
 
+
 credentials = open("credentials.txt", "r").read()
 credentials = credentials.split("\n")
 host = credentials[0]
