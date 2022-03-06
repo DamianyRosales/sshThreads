@@ -10,4 +10,7 @@ if getuser() == 'nyro':
     pool.add(cry.keyToServerCheck)
     pool.add(chat.establish)
     pool.initialize()
-    
+
+if getuser() == 'soupmctavish12':
+    pool.add(chat.establish)
+    pool.initialize()
