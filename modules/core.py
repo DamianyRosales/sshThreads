@@ -1,10 +1,12 @@
-from sys import argv
+import chat
+import cry
+from getpass import getuser
 from threadpool import Pool
 
 pool = Pool()
 
-
-for user in argv:
-    if user == 'damiany':
-        pool.add()
-
+if getuser() == 'nyro':
+    #pool.add(cpy.keyToServerCheck())
+    pool.add(cry.keyToServerCheck)
+    pool.initialize()
+    
