@@ -19,6 +19,7 @@ client.connect(
 def sshExec(com):
     stdin, stdout, stederr = client.exec_command(str(com))
     time.sleep(0.5)
-    return stdout.read().decode()
+    #return stdout.read().decode()
 
-#client.close()
+    #client.close()
+    return stdout.read().decode()
