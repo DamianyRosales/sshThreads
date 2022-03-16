@@ -2,24 +2,46 @@ from sys import stdin
 from paramiko import SSHClient, AutoAddPolicy
 import time
 
+class Client:
+    
+    def __init__(self, credentials=None):
+        self.credentials = open(str(credentials), "r").read().split("\n")
+        self.host = self.credentials[0]
+        self.username = self.credentials[1]
+        self.password = self.credentials[2]
+        self.client = SSHClient()
+        self.client.set_missing_host_key_policy(AutoAddPolicy())
+        self.client.connect(
+            hostname=self.host,
+            username=self.username,
+            password=self.password
+        )
 
-credentials = open("credentials.txt", "r").read()
-credentials = credentials.split("\n")
-host = credentials[0]
-username = credentials[1]
-password = credentials[2]
-client = SSHClient()
-client.set_missing_host_key_policy(AutoAddPolicy())
-client.connect(
-    hostname=host,
-    username=username,
-    password=password
-)
+    def command(self, com):
 
-def sshExec(com):
-    stdin, stdout, stederr = client.exec_command(str(com))
-    time.sleep(0.5)
-    #return stdout.read().decode()
+        stdin, stdout, stederr = self.client.exec_command(str(com))
+        time.sleep(0.5)
+        
+        return stdout.read().decode()
 
-    #client.close()
-    return stdout.read().decode()
+    def close(self):
+        self.client.close()
+        return
+
+def sshExec(com, credentials):
+        __credentials = open(str(credentials), "r").read().split("\n")
+        __host = __credentials[0]
+        __username = __credentials[1]
+        __password = __credentials[2]
+        __client = SSHClient()
+        __client.set_missing_host_key_policy(AutoAddPolicy())
+        __client.connect(
+            hostname=__host,
+            username=__username,
+            password=__password
+        )
+        
+        stdin, stdout, stederr = __client.exec_command(str(com))
+        time.sleep(0.5)
+        __client.close()
+        return stdout.read().decode()

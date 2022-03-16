@@ -2,7 +2,7 @@ from keygenerator import key_generator
 from ssh import sshExec
 
 __keygen = key_generator()
-__server_key = sshExec('cat /home/ayu/Documents/ConcurrentProject/finalproject/key')
+__server_key = sshExec(credentials='credentials.txt', com='cat /home/ayu/Documents/ConcurrentProject/finalproject/key')
 
 def keyToServerCheck():
     a = __keygen.generate()
