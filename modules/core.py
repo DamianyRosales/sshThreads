@@ -11,7 +11,8 @@ chat = communication.Interface(client)
 
 pool.add(chat.establish)
 if getuser() == 'nyro':
-    pool.add(cry.keyToServerCheck)
+    pass
+    #pool.add(cry.keyToServerCheck)
 
 if getuser() == 'soupmctavish12':
     pass

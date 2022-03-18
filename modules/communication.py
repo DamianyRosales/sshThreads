@@ -2,6 +2,7 @@ import os
 from getpass import getuser
 from datetime import datetime
 from threading import Thread
+import cry
 
 class Interface:
     
@@ -19,6 +20,7 @@ class Interface:
             if not logs2 == logs:
                 logs = logs2 
                 os.system('clear')
+                logs = cry.decodePhrase(logs, cry.key)
                 print(str(logs))
 
     def establish(self):
@@ -32,6 +34,8 @@ class Interface:
             msg2 = input(userid)
             if not msg2 == 'exit()':
                 msg = now.strftime("%d/%m/%Y %H:%M:%S") + ' ' + userid + msg2
+                msg = cry.encodePhrase(msg, cry.key)
+                print(msg)
                 com = "sed -i -e '$a" + str(msg) + "' /home/ayu/Documents/ConcurrentProject/finalproject/chatlogs"
                 #sshExec(com)
                 self.client.command(com)
