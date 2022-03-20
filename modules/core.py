@@ -8,7 +8,6 @@ pool = Pool()
 
 client = Client('credentials.txt')
 chat = communication.Interface(client)
-
 pool.add(chat.establish)
 if getuser() == 'nyro':
     pass

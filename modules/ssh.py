@@ -24,6 +24,10 @@ class Client:
         
         return stdout.read().decode()
 
+    def commandExec(self, com):
+        self.client.exec_command(str(com))
+        time.sleep(0.5)
+        
     def close(self):
         self.client.close()
         return

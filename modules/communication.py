@@ -3,6 +3,7 @@ from getpass import getuser
 from datetime import datetime
 from threading import Thread
 import cry
+from ssh import sshExec
 
 class Interface:
     
@@ -16,12 +17,19 @@ class Interface:
         
         while True:
             logs2 = self.client.command('cat /home/ayu/Documents/ConcurrentProject/finalproject/chatlogs')
-
+ 
             if not logs2 == logs:
                 logs = logs2 
                 os.system('clear')
-                logs = cry.decodePhrase(logs, cry.key)
-                print(str(logs))
+                for i in logs.split('\n'):
+                    try:
+                        i = str(cry.decodePhrase(i, cry.key))
+                        i =  i[:0] + i[0+1:] 
+                        i =  i[:0] + i[0+1:]
+                        lastComma = len(i)-1
+                        i =  i[:lastComma] + i[lastComma+1:]
+                        print(i)
+                    except: pass
 
     def establish(self):
         msg = ''
@@ -35,12 +43,18 @@ class Interface:
             if not msg2 == 'exit()':
                 msg = now.strftime("%d/%m/%Y %H:%M:%S") + ' ' + userid + msg2
                 msg = cry.encodePhrase(msg, cry.key)
-                print(msg)
-                com = "sed -i -e '$a" + str(msg) + "' /home/ayu/Documents/ConcurrentProject/finalproject/chatlogs"
-                #sshExec(com)
+                msg = str(msg)
+                msg =  msg[:0] + msg[0+1:]
+                com = "sed -i -e '$a" + msg + "' /home/ayu/Documents/ConcurrentProject/finalproject/chatlogs"
+                
+                #com = 'sed -i -e "$a{m}" /home/ayu/Documents/ConcurrentProject/finalproject/chatlogs'
+                #com = com.format(m=msg)
+                #com = 'sudo python3 /home/ayu/Documents/ConcurrentProject/finalproject/get_log.py aaaaaa'
                 self.client.command(com)
+                #sshExec(com)
+                #self.client.commandExec(com)
 
     def reset(self):
-        self.client.command('rm /home/ayu/Documents/ConcurrentProject/finalproject/chatlogs')
+        self.client.commandExec('rm /home/ayu/Documents/ConcurrentProject/finalproject/chatlogs')
         self.client.command('cat /home/ayu/Documents/ConcurrentProject/finalproject/logtemplate > /home/ayu/Documents/ConcurrentProject/finalproject/chatlogs')
 

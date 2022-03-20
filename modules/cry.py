@@ -12,7 +12,8 @@ def generateKey():
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
         length=32,
-        salt=salt,
+        #salt=salt,
+        salt=b'z/\x94\x0bK\x8e\x83\xd6\xf3\xf7\x9f1\xb0\xf1U\x12',
         iterations=390000,
     )
     key = base64.urlsafe_b64encode(kdf.derive(password))
@@ -33,24 +34,30 @@ def encodePhrase(word, secret):
 
 def decodePhrase(word, secret):
     f = Fernet(secret)
+    word = word.encode('utf-8')
     return f.decrypt(word)
 
 key = generateKey()
 phraseEnc = ""
 
-while True:
+def menu():
+    while True:
 
-    option = input("Desea codificar o decodificar? (0/1) ")
-    if option == "0":
+        option = input("Desea codificar o decodificar? (0/1) ")
+        if option == "0":
 
-        phrase = input("Ingrese la frase a codificar: ")
-        phraseEnc = encodePhrase(phrase, key)
-        print(phraseEnc)
+            phrase = input("Ingrese la frase a codificar: ")
+            phraseEnc = encodePhrase(phrase, key)
+            print(type(phraseEnc))
+            print(phraseEnc)
 
-    elif option == "1":
+        elif option == "1":
 
-        decof = input("Ingrese la frase a decodificar: ")
-        print(decodePhrase(phraseEnc, key))
+            decof = input("Ingrese la frase a decodificar: ")
+            print(decodePhrase(decof, key))
+
+#print(key)
+#menu()
 
 __keygen = key_generator()
 __server_key = sshExec(credentials='credentials.txt', com='cat /home/ayu/Documents/ConcurrentProject/finalproject/key')
