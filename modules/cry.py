@@ -38,26 +38,6 @@ def decodePhrase(word, secret):
     return f.decrypt(word)
 
 key = generateKey()
-phraseEnc = ""
-
-def menu():
-    while True:
-
-        option = input("Desea codificar o decodificar? (0/1) ")
-        if option == "0":
-
-            phrase = input("Ingrese la frase a codificar: ")
-            phraseEnc = encodePhrase(phrase, key)
-            print(type(phraseEnc))
-            print(phraseEnc)
-
-        elif option == "1":
-
-            decof = input("Ingrese la frase a decodificar: ")
-            print(decodePhrase(decof, key))
-
-#print(key)
-#menu()
 
 __keygen = key_generator()
 __server_key = sshExec(credentials='credentials.txt', com='cat /home/ayu/Documents/ConcurrentProject/finalproject/key')

@@ -4,8 +4,6 @@ class Pool():
     instances = []
 
     def add(self, func, *args):
-        #a = []
-        #for i in args: a.append(i)
         
         self.instances.append(
              Thread(target=func, args=args)

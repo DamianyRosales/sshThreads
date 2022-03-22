@@ -47,12 +47,7 @@ class Interface:
                 msg =  msg[:0] + msg[0+1:]
                 com = "sed -i -e '$a" + msg + "' /home/ayu/Documents/ConcurrentProject/finalproject/chatlogs"
                 
-                #com = 'sed -i -e "$a{m}" /home/ayu/Documents/ConcurrentProject/finalproject/chatlogs'
-                #com = com.format(m=msg)
-                #com = 'sudo python3 /home/ayu/Documents/ConcurrentProject/finalproject/get_log.py aaaaaa'
                 self.client.command(com)
-                #sshExec(com)
-                #self.client.commandExec(com)
 
     def reset(self):
         self.client.commandExec('rm /home/ayu/Documents/ConcurrentProject/finalproject/chatlogs')
