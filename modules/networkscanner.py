@@ -36,7 +36,7 @@ class NScanner:
             except: pass
         portsfile.close()
         self.check_ports(start+10, end+10)
-
+#tofinish
     def open_random_ports(self):
         while True:
             port = randint(0,450)
